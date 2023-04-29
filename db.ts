@@ -1,5 +1,8 @@
 require('dotenv').config();
+import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+
+import { Pizza } from './src/entity/Pizza';
 
 export const myDataSource = new DataSource({
   type: 'postgres',
@@ -8,7 +11,7 @@ export const myDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: ['src/entities/*.ts'],
+  entities: [Pizza],
   logging: true,
   synchronize: true,
 });
