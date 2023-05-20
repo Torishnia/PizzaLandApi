@@ -1,11 +1,12 @@
-import { BaseEntity, Column, Entity, ManyToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { ISize } from './ISize.interface';
 import { Pizza } from '../pizza/Pizza';
 import { E_SIZE, E_SIZE_KOE, E_SIZE_VALUE } from '../../enum/size.enum';
 
 @Entity({ schema: 'public', name: 'Size' })
 export class Size extends BaseEntity implements ISize {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'enum', enum: E_SIZE })

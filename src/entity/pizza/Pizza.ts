@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { IPizza } from './IPizza.interface';
 import { Category } from '../category/Category';
 import { Type } from '../type/Type';
@@ -7,7 +8,7 @@ import { Images } from '../images/Images';
 
 @Entity({ schema: 'public', name: 'Pizza' })
 export class Pizza extends BaseEntity implements IPizza {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 128 })

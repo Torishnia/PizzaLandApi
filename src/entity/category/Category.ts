@@ -1,12 +1,12 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
 import { ICategory } from './ICategory.interface';
 import { Pizza } from '../pizza/Pizza';
 import { E_CATEGORY } from '../../enum/category.enum';
 
-
 @Entity({ schema: 'public', name: 'Category' })
 export class Category extends BaseEntity implements ICategory {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'enum', enum: E_CATEGORY })

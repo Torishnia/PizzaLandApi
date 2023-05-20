@@ -1,10 +1,11 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 import { IImages } from './IImages.interface';
 import { Pizza } from '../pizza/Pizza';
 
 @Entity({ schema: 'public', name: 'Images' })
 export class Images extends BaseEntity implements IImages {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 128 })
