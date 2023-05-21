@@ -1,6 +1,6 @@
 export enum E_CATEGORY {
-  MEAT = 'Meat',
-  VEGETARIAN = 'Vegetarian',
-  GRILL = 'Grill',
-  SPICY = 'Spicy',
+  MEAT = 'MEAT',
+  VEGETARIAN = 'VEGETARIAN',
+  GRILL = 'GRILL',
+  SPICY = 'SPICY',
 }
