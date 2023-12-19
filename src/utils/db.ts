@@ -2,11 +2,11 @@ require('dotenv').config();
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
-import { Pizza } from './src/entity/pizza/Pizza';
-import { Category } from './src/entity/category/Category';
-import { Type } from './src/entity/type/Type';
-import { Size } from './src/entity/size/Size';
-import { Images } from './src/entity/images/Images';
+import { Pizza } from '../entity/pizza/Pizza';
+import { Category } from '../entity/category/Category';
+import { Type } from '../entity/type/Type';
+import { Size } from '../entity/size/Size';
+import { Images } from '../entity/images/Images';
 
 export const myDataSource = new DataSource({
   type: 'postgres',

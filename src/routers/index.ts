@@ -1,12 +1,6 @@
 import express from 'express';
 
-const {
-  getAllPizzas, 
-  getPizzaById, 
-  createPizza,
-  updatePizza,
-  deletePizza, 
-} = require('./controllers/Product');
+import { getAllPizzas, getPizzaById, createPizza, updatePizza, deletePizza } from '../controllers/Product';
 
 const router = express.Router();
 
