@@ -23,5 +23,5 @@ export const myDataSource = new DataSource({
     Images,
   ],
   logging: true,
-  synchronize: true,
+  synchronize: true, // Turn on just only dev environment
 });
