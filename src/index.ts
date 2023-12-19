@@ -9,7 +9,7 @@ const application = myDataSource
   .initialize()
   .then(() => {
     console.log('DataBase started');
-    start();
+    return start();
   })
   .catch((err) => console.log('Something wrong with db, error: ', err.message));
 
