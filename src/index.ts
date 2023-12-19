@@ -23,7 +23,7 @@ function start(): Express {
   console.log('Server starting...');
 
   // >>>> for local development <<<<
-  // app.listen(process.env.APP_PORT, () => console.log(`Server started on port: ${process.env.APP_PORT}`));
+  // app.listen(8080, () => console.log(`Server started on port: 8080`));
   return app;
 }
 
