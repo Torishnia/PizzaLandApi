@@ -4,6 +4,8 @@ import { getAllPizzas, getPizzaById, createPizza, updatePizza, deletePizza } fro
 
 const router = express.Router();
 
+router.get('/', (req, res) => res.status(200).json('OK'));
+
 router.get('/pizzas', getAllPizzas);
 router.get('/pizzas/:id', getPizzaById);
 router.post('/pizzas/create', createPizza);
