@@ -3,6 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { pizzasFromMockData as data } from '../mockData';
 import { IPizza } from '../interfaces/IPizza';
+import { myDataSource } from '../utils/db';
+import { Pizza } from '../entity/pizza/Pizza';
+import { ISortOrder } from '../enum/sortOrder.enum';
+import { IResponseStatus } from '../enum/responseStatus.enum';
 
 let pizzasFromMockData: IPizza[] = data;
 
@@ -34,10 +38,24 @@ export function getPizzaById(req: Request, res: Response, next: NextFunction): v
   next();
 }
 
-export function getAllPizzas(req: Request, res: Response, next: NextFunction): void {
-  const pizzas: IPizza[] = pizzasFromMockData;
-  res.status(200).json(pizzas);
-  next();
+export async function getAllPizzas(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const { categoryId, search, sortBy, sortOrder } = req.query;
+    const pizzaRepo = myDataSource
+      .getRepository(Pizza)
+      .createQueryBuilder('pizza');
+
+    if (search) pizzaRepo.andWhere(`pizza.title LIKE '%${search}%'`);
+    if (categoryId) pizzaRepo.andWhere(`pizza.categoryId = ${categoryId}`);
+    // TODO Valeria. Need to fix SortOrder
+    if (sortBy && sortOrder) pizzaRepo.orderBy(`"${sortBy}"`, "DESC");
+
+    const data = await pizzaRepo.getMany();
+    res.status(200).json({ status: IResponseStatus.SUCCESS, data });
+    next();
+  } catch (e: any) {
+    res.status(404).json({ status: IResponseStatus.ERROR, data: [] });
+  }
 }
 
 export function updatePizza(req: Request, res: Response, next: NextFunction): void {
@@ -80,4 +98,11 @@ export function deletePizza(req: Request, res: Response, next: NextFunction): vo
 
   res.status(200).json({ message: 'Pizza with such id was deleted' });
   next();
+}
+
+interface IQueryParams {
+  categoryId: string,
+  search: string,
+  sortBy: string,
+  sortOrder: ISortOrder;
 }
