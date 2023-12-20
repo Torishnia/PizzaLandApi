@@ -20,10 +20,10 @@ function start(): Express {
   app.use('/', router);
 
   // >>>> for public <<<<
-  // console.log('Server starting...');
+  console.log('Server starting...');
 
   // >>>> for local development <<<<
-  app.listen(8080, () => console.log(`Server started on port: 8080`));
+  // app.listen(8080, () => console.log(`Server started on port: 8080`));
   return app;
 }
 
