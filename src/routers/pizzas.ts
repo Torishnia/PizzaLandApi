@@ -4,7 +4,7 @@ import {
   getPizzaById,
   getPizzasByCategoryId,
   getAllPizzas,
-} from '../controllers/Pizzas';
+} from '../controllers/Pizza';
 
 const router = express.Router();
 

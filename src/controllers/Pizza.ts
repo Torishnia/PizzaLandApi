@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import { myDataSource } from '../utils/db';
 import { Pizza } from '../entity/pizza/Pizza';
 import { ISortOrder } from '../enum/sortOrder.enum';
-import { IResponseStatus } from '../enum/responseStatus.enum';
 
 export async function getPizzaById(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -14,17 +13,17 @@ export async function getPizzaById(req: Request, res: Response, next: NextFuncti
         .where(`pizza.id = ${id}`)
         .getOne() ?? {};
 
-    res.status(200).json({ status: IResponseStatus.SUCCESS, data });
+    res.status(200).json({ data });
     next();
   } catch (e: any) {
-    res.status(404).json({ status: IResponseStatus.ERROR, data: {} });
+    res.status(404).json({ data: {} });
   }
 }
 
 export async function getPizzasByCategoryId(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { id: categoryId } = req.params;
-    if (!categoryId) res.status(404).json({ status: IResponseStatus.ERROR, data: [] });
+    if (!categoryId) res.status(404).json({ data: [] });
 
     const data = await myDataSource
       .getRepository(Pizza)
@@ -32,10 +31,10 @@ export async function getPizzasByCategoryId(req: Request, res: Response, next: N
       .where(`pizza.categoryId = ${categoryId}`)
       .getMany() ?? [];
     
-    res.status(200).json({ status: IResponseStatus.SUCCESS, data });
+    res.status(200).json({ data });
     next();
   } catch (e: any) {
-    res.status(404).json({ status: IResponseStatus.ERROR, data: [] });
+    res.status(404).json({ data: [] });
   }
 }
 
@@ -51,11 +50,11 @@ export async function getAllPizzas(req: Request, res: Response, next: NextFuncti
     // TODO Valeria. Need to fix SortOrder
     if (sortBy && sortOrder) pizzaRepo.orderBy(`"${sortBy}"`, "DESC");
 
-    const data = await pizzaRepo.getMany();
-    res.status(200).json({ status: IResponseStatus.SUCCESS, data });
+    const data = await pizzaRepo.getMany() ?? [];
+    res.status(200).json({ data });
     next();
   } catch (e: any) {
-    res.status(404).json({ status: IResponseStatus.ERROR, data: [] });
+    res.status(404).json({ data: [] });
   }
 }
 
