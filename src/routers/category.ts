@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getAllCategories } from '../controllers/Category';
+import { getAllCategories, getAll } from '../controllers/Category';
 
 const router = express.Router();
 
