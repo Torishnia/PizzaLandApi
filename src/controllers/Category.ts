@@ -5,6 +5,8 @@ import { Category } from '../entity/category/Category';
 
 export async function getAllCategories(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    console.log('QWEQWEWQEQWE');
+    
     const result = await myDataSource
       .getRepository(Category)
       .createQueryBuilder('category')
