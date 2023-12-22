@@ -11,8 +11,9 @@ export async function getAllCategories(req: Request, res: Response, next: NextFu
       .getMany() ?? [];
 
     res.status(200).json(result);
-    next();
+    next();    
   } catch (e: any) {
-    res.status(404).json([]);
+    console.log('Error <<< ', e);
+    res.status(403).json([]);
   }
 }
