@@ -7,34 +7,16 @@ import { ISortOrder } from '../enum/sortOrder.enum';
 export async function getPizzaById(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { id } = req.params;
-    const data = await myDataSource
+    const pizza = await myDataSource
         .getRepository(Pizza)
         .createQueryBuilder('pizza')
         .where(`pizza.id = ${id}`)
-        .getOne() ?? {};
+        .getOne();
 
-    res.status(200).json({ data });
+    res.status(200).json(pizza);
     next();
   } catch (e: any) {
-    res.status(404).json({ data: {} });
-  }
-}
-
-export async function getPizzasByCategoryId(req: Request, res: Response, next: NextFunction): Promise<void> {
-  try {
-    const { id: categoryId } = req.params;
-    if (!categoryId) res.status(404).json({ data: [] });
-
-    const data = await myDataSource
-      .getRepository(Pizza)
-      .createQueryBuilder('pizza')
-      .where(`pizza.categoryId = ${categoryId}`)
-      .getMany() ?? [];
-    
-    res.status(200).json({ data });
-    next();
-  } catch (e: any) {
-    res.status(404).json({ data: [] });
+    res.status(404).json([]);
   }
 }
 
@@ -43,18 +25,20 @@ export async function getAllPizzas(req: Request, res: Response, next: NextFuncti
     const { categoryId, search, sortBy, sortOrder } = req.query;
     const pizzaRepo = myDataSource
       .getRepository(Pizza)
-      .createQueryBuilder('pizza');
+      .createQueryBuilder('pizza')
+      .leftJoinAndSelect('pizza.types', 'types')
+      .leftJoinAndSelect('pizza.sizes', 'sizes');
 
     if (search) pizzaRepo.andWhere(`pizza.title LIKE '%${search}%'`);
     if (categoryId) pizzaRepo.andWhere(`pizza.categoryId = ${categoryId}`);
     // TODO Valeria. Need to fix SortOrder
-    if (sortBy && sortOrder) pizzaRepo.orderBy(`"${sortBy}"`, "DESC");
+    if (sortBy && sortOrder) pizzaRepo.orderBy(`pizza.${sortBy}`, "ASC");
 
-    const data = await pizzaRepo.getMany() ?? [];
-    res.status(200).json({ data });
+    const result = await pizzaRepo.getMany() ?? [];
+    res.status(200).json(result);
     next();
   } catch (e: any) {
-    res.status(404).json({ data: [] });
+    res.status(404).json([]);
   }
 }
 
