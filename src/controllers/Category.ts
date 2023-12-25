@@ -13,7 +13,6 @@ export async function getAllCategories(req: Request, res: Response, next: NextFu
     res.status(200).json(result);
     next();    
   } catch (e: any) {
-    console.log('Error <<< ', e);
     res.status(403).json([]);
   }
 }
