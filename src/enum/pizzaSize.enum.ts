@@ -12,6 +12,6 @@ export enum E_PIZZA_SIZE_VALUE {
 
 export enum E_PIZZA_SIZE_KOE {
   S = 1,
-  M = 1.5,
-  L = 2,
+  M = 2,
+  L = 3,
 }
