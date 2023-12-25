@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { myDataSource } from '../utils/db';
+import { SortOrderType } from '../type';
 import { Pizza } from '../entity/pizza/Pizza';
 import { ISortOrder } from '../enum/sortOrder.enum';
 
@@ -27,12 +28,13 @@ export async function getAllPizzas(req: Request, res: Response, next: NextFuncti
       .getRepository(Pizza)
       .createQueryBuilder('pizza')
       .leftJoinAndSelect('pizza.types', 'types')
-      .leftJoinAndSelect('pizza.sizes', 'sizes');
+      .leftJoinAndSelect('pizza.sizes', 'sizes')
+      .orderBy(`pizza.${sortBy ?? 'title'}`, `${sortOrder as SortOrderType ?? ISortOrder.ASC }`)
+      .addOrderBy('types.id', 'ASC')
+      .addOrderBy('sizes.id', 'ASC');
 
     if (search) pizzaRepo.andWhere(`pizza.title LIKE '%${search}%'`);
     if (categoryId) pizzaRepo.andWhere(`pizza.categoryId = ${categoryId}`);
-    // TODO Valeria. Need to fix SortOrder
-    if (sortBy && sortOrder) pizzaRepo.orderBy(`pizza.${sortBy}`, "ASC");
 
     const result = await pizzaRepo.getMany() ?? [];
     res.status(200).json(result);
@@ -98,10 +100,3 @@ export async function getAllPizzas(req: Request, res: Response, next: NextFuncti
 //   res.status(200).json({ message: 'Pizza with such id was deleted' });
 //   next();
 // }
-
-interface IQueryParams {
-  categoryId: string,
-  search: string,
-  sortBy: string,
-  sortOrder: ISortOrder;
-}

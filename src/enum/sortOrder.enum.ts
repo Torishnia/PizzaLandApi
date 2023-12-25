@@ -1,4 +1,4 @@
 export enum ISortOrder {
-  ASC = "ASC",
-  DESC = "DESC",
+  ASC = 'ASC',
+  DESC = 'DESC',
 }

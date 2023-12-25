@@ -1,4 +1,4 @@
-export enum E_TYPE {
+export enum E_PIZZA_TYPE {
   THIN = 'THIN',
   TRADITIONAL = 'TRADITIONAL',
 }

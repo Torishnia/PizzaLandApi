@@ -1,4 +1,4 @@
-export enum E_CATEGORY {
+export enum E_PIZZA_CATEGORY {
   MEAT = 'MEAT',
   VEGETARIAN = 'VEGETARIAN',
   GRILL = 'GRILL',
