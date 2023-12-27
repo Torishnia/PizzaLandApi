@@ -1,7 +1,8 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { IImages } from './IImages.interface';
 import { Pizza } from '../pizza/Pizza';
+import { IPizza } from '../pizza/IPizza.interface';
 
 @Entity({ schema: 'public', name: 'Images' })
 export class Images extends BaseEntity implements IImages {
@@ -18,5 +19,5 @@ export class Images extends BaseEntity implements IImages {
   pizzaId: number;
 
   @ManyToOne(() => Pizza, pizza => pizza.images)
-  pizza: Pizza;
+  pizza: IPizza;
 }

@@ -1,10 +1,14 @@
-import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { IPizza } from './IPizza.interface';
 import { Category } from '../category/Category';
 import { Type } from '../type/Type';
 import { Size } from '../size/Size';
 import { Images } from '../images/Images';
+import { IImages } from '../images/IImages.interface';
+import { ICategory } from '../category/ICategory.interface';
+import { IType } from '../type/IType.interface';
+import { ISize } from '../size/ISize.interface';
 
 @Entity({ schema: 'public', name: 'Pizza' })
 export class Pizza extends BaseEntity implements IPizza {
@@ -30,10 +34,10 @@ export class Pizza extends BaseEntity implements IPizza {
   categoryId: number;
 
   @OneToMany(() => Images, image => image.pizza)
-  images: Images[];
+  images: IImages[];
 
   @ManyToOne(() => Category, category => category.pizzas)
-  category: Category;
+  category: ICategory;
 
   @ManyToMany(() => Type, type => type.pizzas)
   @JoinTable({
@@ -47,7 +51,7 @@ export class Pizza extends BaseEntity implements IPizza {
       referencedColumnName: "id"
     },
   })
-  types: Type[];
+  types: IType[];
 
   @ManyToMany(() => Size, size => size.pizzas)
   @JoinTable({
@@ -61,5 +65,5 @@ export class Pizza extends BaseEntity implements IPizza {
       referencedColumnName: "id"
     },
   })
-  sizes: Size[];
+  sizes: ISize[];
 }

@@ -7,6 +7,9 @@ import { Category } from '../entity/category/Category';
 import { Type } from '../entity/type/Type';
 import { Size } from '../entity/size/Size';
 import { Images } from '../entity/images/Images';
+import { User } from '../entity/user/User';
+import { Order } from '../entity/order/Order';
+import { Position } from '../entity/position/Position';
 
 export const myDataSource = new DataSource({
   type: 'postgres',
@@ -21,6 +24,9 @@ export const myDataSource = new DataSource({
     Type,
     Size,
     Images,
+    User,
+    Order,
+    Position,
   ],
   logging: true,
   synchronize: true, // Turn on just only dev environment

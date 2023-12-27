@@ -1,9 +1,8 @@
 import { E_PIZZA_TYPE } from '../../enum/pizzaType.enum';
-import { Pizza } from '../pizza/Pizza';
+import { IPizza } from '../pizza/IPizza.interface';
 
 export interface IType {
-  id: number,
-  title: E_PIZZA_TYPE,
-
-  pizzas?: Pizza[];
+  id: number;
+  title: E_PIZZA_TYPE;
+  pizzas?: IPizza[];
 }

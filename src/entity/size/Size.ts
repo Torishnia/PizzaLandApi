@@ -1,8 +1,9 @@
-import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ISize } from './ISize.interface';
 import { Pizza } from '../pizza/Pizza';
 import { E_PIZZA_SIZE, E_PIZZA_SIZE_VALUE, E_PIZZA_SIZE_KOE } from '../../enum/pizzaSize.enum';
+import { IPizza } from '../pizza/IPizza.interface';
 
 @Entity({ schema: 'public', name: 'Size' })
 export class Size extends BaseEntity implements ISize {
@@ -19,5 +20,5 @@ export class Size extends BaseEntity implements ISize {
   coefficient: E_PIZZA_SIZE_KOE;
 
   @ManyToMany(() => Pizza, pizza => pizza.sizes)
-  pizzas: Pizza[];
+  pizzas: IPizza[];
 }

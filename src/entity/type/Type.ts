@@ -1,8 +1,9 @@
-import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { IType } from './IType.interface';
 import { Pizza } from '../pizza/Pizza';
 import { E_PIZZA_TYPE } from '../../enum/pizzaType.enum';
+import { IPizza } from '../pizza/IPizza.interface';
 
 @Entity({ schema: 'public', name: 'Type' })
 export class Type extends BaseEntity implements IType {
@@ -13,5 +14,5 @@ export class Type extends BaseEntity implements IType {
   title: E_PIZZA_TYPE;
 
   @ManyToMany(() => Pizza, pizza => pizza.types)
-  pizzas: Pizza[];
+  pizzas: IPizza[];
 }
