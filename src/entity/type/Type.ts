@@ -10,7 +10,7 @@ export class Type extends BaseEntity implements IType {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'enum', enum: E_PIZZA_TYPE })
+  @Column({ type: 'enum', enum: E_PIZZA_TYPE, default: E_PIZZA_TYPE.THIN })
   title: E_PIZZA_TYPE;
 
   @ManyToMany(() => Pizza, pizza => pizza.types)

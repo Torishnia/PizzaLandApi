@@ -10,7 +10,7 @@ export class Category extends BaseEntity implements ICategory {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'enum', enum: E_PIZZA_CATEGORY })
+  @Column({ type: 'enum', enum: E_PIZZA_CATEGORY, default: E_PIZZA_CATEGORY.MEAT })
   title: E_PIZZA_CATEGORY;
 
   @OneToMany(() => Pizza, pizza => pizza.category)

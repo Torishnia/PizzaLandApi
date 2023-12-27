@@ -5,6 +5,7 @@ import { User } from '../user/User';
 import { IUser } from '../user/IUser.interface';
 import { IPosition } from '../position/IPosition.interface';
 import { Position } from '../position/Position';
+import { E_ORDER_STATUS } from '../../enum/orderStatus.enum';
 
 @Entity({ schema: 'public', name: 'Order' })
 export class Order extends BaseEntity implements IOrder {
@@ -16,6 +17,9 @@ export class Order extends BaseEntity implements IOrder {
 
   @Column()
   totalPrice: number;
+
+  @Column({ type: 'enum', enum: E_ORDER_STATUS, default: E_ORDER_STATUS.ACTIVE })
+  status: E_ORDER_STATUS;
 
   @Column()
   userId: number;
